@@ -10,23 +10,30 @@ Using Hans Rosling’s Gapminder visual format, this project explores how the me
 There are 5454 different exoplanets in this dataset with 4 features. 
 
 •	DATE: The year the planet was discovered (starting in 1990)
+
 •	Radius R (rjupiter): This represents the radius of the planet as a ratio of Jupiter's radius.
+
 •	Period (days): This is how long a "year" is on one of those planets. Very early planets tended to orbit closely to their star, which increased the oscillations favored by the Gravity Method
 
 ### Planet Discovery Methods
 PLANETDISCMETHOD: Method used to discover the planet. This is a category, since there are very few methods used. The methods are as follows
+
 •	Transit: The planet moving in front of its star causes an eclipse when viewed from Earth and thus the star's luminosity decreases.
 
 •	Transit Timing Variation: Once a planet has been discovered by the transit method, a decrease in brightness is to be expected at a period of a planet's orbit. If a repeated decrease in brightness occurs outside of that period, it may indicate the presence of a second planet. 
 
 •	Timing: Other timing methods such as Pulsar Timing (for planets discovered around Pulsars)
+
 •	Microlensing: The planet's gravity bends the star's light, causing a doppler shift in the starlight.
+
 •	Radial Velocity (RV): The planet's gravity causes the star to oscillate. By measuring the oscillation, we can approximate the planet's mass, radius, and orbit. This was the earliest method used, and it typically favors larger planets. 
+
 •	Imaging: The planet was directly imaged. This is a new method at the time the data was collected.
 
 ## Structure of visualization
 
 Each circle represents a PLANETDISCMETH. The centroid of the circle is the median planetary Radius and Period of the planet discovered that year. A variable called numPlanets was created to demonstrate that. The Radius of the circle represents the number of planets discovered via that particular method for that year. 
+
 •	numPlanets: I created this variable. This is the number of planets discovered in the same year as the particular exoplanet by the same planetary discovery method 
 
 ## Outliers and NA
