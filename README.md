@@ -44,7 +44,10 @@ Exoplanet detection is still a new field. Thus, the data itself was incomplete. 
 ## Feedback
 
 ## References
- http://exoplanets.org/index.html
+http://exoplanets.org/index.html
+ 
 https://en.wikipedia.org/wiki/Methods_of_detecting_exoplanets
+
 https://en.wikipedia.org/wiki/Jupiter
+
 https://en.wikipedia.org/wiki/Earth
