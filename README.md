@@ -2,6 +2,7 @@
 
 ## Gist Address
 https://gist.github.com/vtocitu365
+
 http://bl.ocks.org/vtocitu365/cda2fa4f7e47e57ba1d6c170bf761388
 
 ## Summary
@@ -36,6 +37,9 @@ PLANETDISCMETHOD: Method used to discover the planet. This is a category, since 
 
 •	Imaging: The planet was directly imaged. This is a new method at the time the data was collected.
 
+## Outliers and NA
+Exoplanet detection is still a new field. Thus, the data itself was incomplete. If the planet lacks any of these features, it is not taken into consideration. This is purely for the purpose of preserving the visualization. In addition, planets with extremely large radii and extremely long periods have been discovered. Free-floating planets have also been discovered, which are represented by an infinite period. Since such outliers are so far rare, they have been excluded from the visualization. As the data is right-skewed, the range of both the Period and the Radius is artificially limited to show the relevant trends.
+
 ## Structure of visualization
 
 * Circle: Each circle represents a planetary discovery method. Since there are four discovery methods, each year has up to four circles. Note that some of these methods didn't exist in the 1990s and 2000s. Also, some of these methods didn't yield any discoveries or their planets were removed from consideration as described in the section above. Thus, the circles representing some methods don't appear every year.
@@ -51,9 +55,6 @@ PLANETDISCMETHOD: Method used to discover the planet. This is a category, since 
 * Radius: The square root of the number of planets discovered by each method that particular year. We want the circle's area to be proportional to the number of planets discovered that year.
 
 * Coloring: Each method should have its own coloring which lets it stand out when compared to other methods.
-
-## Outliers and NA
-Exoplanet detection is still a new field. Thus, the data itself was incomplete. If the planet lacks any of these features, it is not taken into consideration. This is purely for the purpose of preserving the visualization. In addition, planets with extremely large radii and extremely long periods have been discovered. Free-floating planets have also been discovered, which are represented by an infinite period. Since such outliers are so far rare, they have been excluded from the visualization. As the data is right-skewed, the range of both the Period and the Radius is artificially limited to show the relevant trends.
 
 ## Analysis
 The visualization confirms the exponential nature of planetary discoveries. At the same time, it hints at the continued predominance of the transit method. However, there is still not enough information for us to safely assume that this proves Transit is the most effective method. Remember, a lot of planets were removed from this dataset because one of these parameters wasn't listed in the publicly available dataset. With this limitation in mind, we can make the following tentative observations
