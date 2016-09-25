@@ -1,214 +1,168 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-
 <html>
-  <head>
-    <script type="text/javascript" src="./d3.v3.min.js"></script>
-    <script type="text/javascript" src="./queue.min.js"></script>
-  </head>
-      <button onclick="map()">Map</button>
-  <body>
-    <div class="DATE">
-    </div>
-    <style type="text/css" media="screen">
-      .DATE{
-        font-size: 70px;
-        color: grey;
-      }
-    </style>
+<head>
+  <meta charset="utf-8">
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://dimplejs.org/dist/dimple.v2.1.2.js"></script>
+  
+  <style>
+
+    circle {
+      opacity: 0.6;
+    }
+
+  </style>
     <script type="text/javascript">
-      var width = 500,
-         height = 400,
-         interval = 200
+      function draw(data) {
 
-      var svg = d3.select("body").append("svg")
-         .attr({
-           class:"svg", 
-           width:width, 
-           height:height
-          })
-          .append("g")
-            .attr("transform", "translate(50,50)");
 
-      var color = d3.scale.category10()
+      /*
+        D3.js setup code
+      */
+          //Note: to use bl.ocks.org, must have svg fit within 960 x 500 pixels
+          "use strict";
 
-      queue()
-        .defer(d3.csv, "exoplanets.csv")
-        .await(ready);
+          var padding = 55,
+              width = 960,
+              height = 500,
+              rightBar = width / 8,
+              legendheight = height/4;
 
-      function ready(error, exoplanet) {
-        exoplanet = exoplanet.map(function(d){
-          d.R = parseFloat(d.R)
-          d.PERIOD = parseFloat(d.PERIOD)
-          d.numPlanets = parseInt(d.numPlanets)
-          return d
-        })
-
-        var plnaetNum = d3.nest()
-        .key(function(d) { return d.DATE; })
-        .key(function(d) { return d.PLANETDISCMETH; })
-          .rollup(function(v) { return {
-            count: v.length,
-            medianR: d3.median(v, function(d) { 
-              return d.R; }),
-            medianPeriod: d3.median(v, function(d) { 
-              return d.PERIOD; })
-  }; })
-        .entries(exoplanet);
-
-        console.log(plnaetNum)
-
-        var radius = d3.scale.linear()
-              .domain(
-                d3.extent(exoplanet, function(d){ return d.numPlanets})
-              ).range([5,30])
-
-        var x = d3.scale.linear()
-              .domain(
-                [0, 2]
-              ).range([0, width - 100]);
-
-        var y = d3.scale.linear()
-              .domain([0, 500])
-              .range([height, 20]);
-
-        var xAxis = d3.svg.axis()
-          .scale(x)
-          .orient("top")
-          .tickSize(0.1)
-
-        var yAxis = d3.svg.axis()
-          .scale(y)
-          .orient("left")
-          .tickSize(1)
-
-        svg.append("g")
-          .attr("class", "x axis");
-
-        d3.select(".x.axis")
-          .call(xAxis);
-
-        svg.append("text")
-            .attr("class", "x label")
-            .attr("text-anchor", "end")
-            .attr("y", -40)
-            .attr("x", width / 2)
-            .attr("dy", ".75em")
-            .text("Radius (ratio of Jupiter's)");
-
-        svg.append("g")
-          .attr("class", "y axis");
-
-        d3.select(".y.axis")
-          .call(yAxis);
-
-        svg.append("text")
-            .attr("class", "y label")
-            .attr("text-anchor", "end")
-            .attr("y", -45)
-            .attr("x", -120)
-            .attr("dy", ".75em")
-            .attr("transform", "rotate(-90)")
-            .text("Period (days)");
-
-        var chart = function(data){
-          var yearDiv = d3.select(".DATE")
+      
+          var svg = d3.select("body")
+            .append("svg")
+              .attr("width", width)
+              .attr("height", height)
+            .append('g')
+                .attr('class','chart');
           
+          var yearfilter = d3.range(1990, 2016);
+          yearfilter = yearfilter.toString().split(',');
 
-          var group = svg.selectAll(".group")
-              .data(data, function(d){return d.PLANETDISCMETH});
+          var frame = 2500; 
+          var firstTick = true;
+          
+          var myChart = new dimple.chart(svg, data);
+          myChart.setBounds(padding, 2*padding + 10, width - rightBar - 2 * padding, height- 3* padding - 10);
+          var xAxis = myChart.addMeasureAxis("x", "R");
+          var yAxis = myChart.addMeasureAxis("y", "PERIOD");
+          xAxis.addOrderRule("R")
+          var zAxis = myChart.addMeasureAxis("z", "numPlanets");
+          
+          xAxis.tickFormat = '.1f';
+          //Show decimal value on mouse-over
+          yAxis.tickFormat = '.1f';  
 
-          var groupEnter = group.enter().append('g')
-            .attr('class', 'group')
+          //fix the axes so they don't shift around so much during animation
+          xAxis.overrideMin = 0;
+          xAxis.overrideMax = 100;
+          yAxis.overrideMax = 500;
+          yAxis.overrideMin = 0; //BMI axis does not need to go down to 0
 
-          var groupUpdate = group.transition().duration(interval).ease('linear')
+          xAxis.title = "R (ratio of Jupiter)";
+          yAxis.title = "Period (Days)";
+          zAxis.title = "Number of Discovered Planets";
 
-          var groupExit = d3.transition(group.exit())
-            .remove()
-
-          groupEnter.append("circle")
-            .attr("cx", function(d){return parseFloat(plnaetNum["medianR"])})
-            .attr("cy", function(d){return plnaetNum["medianPeriod"]})
-            .attr("r", function(d){return plnaetNum["length"]})
-            .style("fill", function(d){return color(d.PLANETDISCMETH)})
-            .on('mouseover', function(d){
-              d3.select(this.parentElement).select('text').style('opacity', 1)
-            })
-            .on('mouseout', function(d){
-              d3.select(this.parentElement).select('text').style('opacity', 0)
-            })
-
-          groupEnter.append('text')
-            .attr("cx", function(d){return parseFloat(plnaetNum["medianR"])})
-            .attr("cy", function(d){return plnaetNum["medianPeriod"]})
-            .attr("r", function(d){return plnaetNum["length"]})
-            .attr("dx", -3)
-            .attr("dy", ".35em")
-            .attr("text-anchor", "end")
-            .text(function(d){return d.PLANETDISCMETH})
-            .style('opacity', 0)
-
-          groupUpdate.select('circle')
-            .attr("cx", function(d){return parseFloat(x(plnaetNum["medianR"]))})
-            .attr("cy", function(d){return y(plnaetNum["medianPeriod"])})
-            .attr("r",  function(d){return radius(d.numPlanets)})
-
-          groupUpdate.select('text')
-            .attr("cx", function(d){return parseFloat(plnaetNum["medianR"])})
-            .attr("cy", function(d){return plnaetNum["medianPeriod"]})
-            .attr("r", function(d){return plnaetNum["length"]})
-
-        }
-
-        getCentroid = function(discovery){
-         var feature = exoplanet.features.filter(function(f){
-           return f.properties.name == PLANETDISCMETH
-         })[0]
-         return geopath.centroid(feature)
-        }
-
-        map = function(){
-           d3.select("g").selectAll("path")
-               .data(exoplanet.features)
-             .enter().append("path")
-               .attr({
-                 "d":geopath
-               });
-
-          var circle = svg.selectAll("circle")
-
-          circle.transition().duration(10000)
-              .attr({
-                r:function(d){
-                  return radius(d.numPlanets)
-                },
-                cx:function(d){
-                  return getCentroid(d.R)
-                },
-                cy: function(d){
-                  return getCentroid(d.PERIOD)
-                }
-              })
-        }
+          var bubbleSeries = myChart.addSeries(["DATE", "PLANETDISCMETH"], dimple.plot.bubble);
 
 
-
-        counters = 1990
-        counter = counters
-
-        i = 0
-        i = setInterval(
-          function(){
-            chart(exoplanet.filter(function(y){ return y.DATE == counter}).reverse())
-            counter+=1
-            if (counter < counters) {
-              clearInterval(i)
+          bubbleSeries.getTooltipText = function (e) {
+                return [
+                    "Day: " + e.aggField[0],
+                    "Discovery Method: " + e.aggField[1].sqrt,
+                    "Number Planets:" + (e.zValue).toFixed(2),
+                    "Median Radius: " + Math.log10((e.xValue).toFixed(3)),
+                    "Median Period: " + (e.yValue).toFixed(4)
+                ];
             };
-           }, interval
-        )
 
-      }
 
-    </script>
-  </body>
+        //Add Plot Title
+          svg.append("text")
+            .attr("x", 20)
+            .attr("y", 20)
+            .style("text-anchor", "left")
+            .style("font-family", "sans-serif")
+            .style("font-weight", "bold")
+            .text("Characteristics of Discovered Planets")
+
+          svg.selectAll("discoveryLegendLabel")
+            .data(["PLANETDISCMETH"])
+            .enter()
+            .append("text")
+              .attr("x", 20)
+              .attr("y", padding + 38 )
+              .style("font-size", "14px")
+              .style("font-weight", "bold")
+              .style("color", "Black")
+              .style("font-family", "sans-serif")
+              .text(function (d) { return d; });
+
+          //Planetary Discovery Methods legend above chart
+          var myDiscoveryLegend = myChart.addLegend(padding, padding + 28,
+                            rightBar * 4,legendheight, "center");
+
+
+          myChart.draw()
+
+          myChart.legends = [];
+
+          var discoveryVals = dimple.getUniqueValues(data, "PLANETDISCMETH");
+
+          myDiscoveryLegend.shapes.selectAll("rect")
+            //Add a click event to each rectangle
+            .on("click", function (e)  {
+              //Is rectangle already visible?
+              var hideRect = false;
+              var newFilters = [];
+              //if filters contain clicked shape then hide it
+              discoveryVals.forEach(function (f) {
+                if (f === e.aggField.slice(-1)[0]) {
+                  hideRect = true;
+                } else {
+                  newFilters.push(f);
+                }
+              });
+              // Either hide the shape or show it now
+              if (hideRect) {
+                d3.select(this).style("opacity", 0.2);
+              } else {
+                newFilters.push(e.aggField.slice(-1)[0]);
+                d3.select(this).style("opacity", 0.8);
+              }
+              //Update our filters now
+              discoveryVals = newFilters;
+              //Filter the data by selected
+              myChart.data = dimple.filterData(data, "PLANETDISCMETH", discoveryVals);
+              myChart.draw(800);
+              if (!isticking) { // only keep animation paused if it is already paused
+                storyboard.pauseAnimation();
+              }
+              
+            });
+
+      };
+
+</script>
+</head>
+<body>
+  <script type="text/javascript">
+  /*
+    Use D3 (not dimple.js) to load the TSV file
+    and pass the contents of it to the draw function
+    */
+
+  d3.csv("exoplanets.csv", function(d) {
+    return {
+          DATE: d.DATE,
+          PLANETDISCMETH: d.PLANETDISCMETH,
+          R: d.R,
+          PERIOD: d.PERIOD,
+          numPlanets: d.numPlanets
+          };
+        }, draw);
+  
+
+  </script>
+</body>
 </html>
