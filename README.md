@@ -2,6 +2,7 @@
 
 ## Gist Address
 https://gist.github.com/vtocitu365
+http://bl.ocks.org/vtocitu365/cda2fa4f7e47e57ba1d6c170bf761388
 
 ## Summary
 Every year, telescopes such as the Kepler Space Telescope discover hundreds of worlds. These telescopes not only confirm the planet's existence, but they also record characteristics of the planet such as its Radius and its Period (the time it takes the planet to orbit the star). Using Hans Rosling’s Gapminder visual format, this visualization explores the following questions
@@ -22,6 +23,8 @@ There are 5454 different exoplanets in this dataset with 4 features.
 
 •	Period (days): This is how long a "year" is on one of those planets. Very early planets tended to orbit closely to their star, which increased the oscillations favored by the Gravity Method
 
+•	numPlanets: I created this variable. This is the number of planets discovered in the same year as the particular exoplanet by the same planetary discovery method 
+
 ### Planet Discovery Methods
 PLANETDISCMETHOD: Method used to discover the planet. This is a category, since there are very few methods used. The methods are as follows
 
@@ -35,9 +38,19 @@ PLANETDISCMETHOD: Method used to discover the planet. This is a category, since 
 
 ## Structure of visualization
 
-Each circle represents a PLANETDISCMETH. The centroid of the circle is the median planetary Radius and Period of the planet discovered that year. A variable called numPlanets was created to demonstrate that. The Radius of the circle represents the number of planets discovered via that particular method for that year. 
+* Circle: Each circle represents a planetary discovery method. Since there are four discovery methods, each year has up to four circles. Note that some of these methods didn't exist in the 1990s and 2000s. Also, some of these methods didn't yield any discoveries or their planets were removed from consideration as described in the section above. Thus, the circles representing some methods don't appear every year.
 
-•	numPlanets: I created this variable. This is the number of planets discovered in the same year as the particular exoplanet by the same planetary discovery method 
+* x-Axis: The radius of the planets as a ratio of Jupiter's radius
+
+* y-Axis: The planet's equivalent of a year (period) measured in days
+
+* Centroid-x: The median radii of the planets discovered that year
+
+* Centroid-y: The median period of the planets discovered that year
+
+* Radius: The square root of the number of planets discovered by each method that particular year. We want the circle's area to be proportional to the number of planets discovered that year.
+
+* Coloring: Each method should have its own coloring which lets it stand out when compared to other methods.
 
 ## Outliers and NA
 Exoplanet detection is still a new field. Thus, the data itself was incomplete. If the planet lacks any of these features, it is not taken into consideration. This is purely for the purpose of preserving the visualization. In addition, planets with extremely large radii and extremely long periods have been discovered. Free-floating planets have also been discovered, which are represented by an infinite period. Since such outliers are so far rare, they have been excluded from the visualization. As the data is right-skewed, the range of both the Period and the Radius is artificially limited to show the relevant trends.
@@ -50,12 +63,24 @@ The median radius and period of planets discovered have increased. The increase 
 As more data comes in, this visual should improve in its functionality
 
 ## Feedback
-1. Take the square root of numPlanets so that the circle area is proportional to the number of planets discovered
-2. The legend is poorly aligned
-3. The title can't simply be two words
-4. You need to fix the x and y axis. Since the distribution is exponential, people may miss the smaller bubbles
+The feedback came from a variety of sources, both Udacity and co-workers. The co-workers reviewed it, but I don't have their permission to publicly list their names. Instead, I will put their contributions in its own list. I receive some Udacity feedback from the reviews of previous submissions. Since I don't know the reviewer's name, I will just list them as Reviewer 1, Reviewer 2, etc.
+
+Co-workers
+
+* The legend is poorly aligned
+
+* The title can't simply be two words, pleas make it longer
+
+* You need to fix the x and y axis. Since the distribution is exponential, people may miss the smaller bubbles
+
+Udacity
+
+* Take the square root of numPlanets so that the circle area is proportional to the number of planets discovered (Sheng Kung, Udacity Coach)
+
+*  Please be sure to include an explanation for all visual encodings, position, color, etc. (Reviewer 1)
 
 ## References
+
 http://exoplanets.org/index.html
  
 https://en.wikipedia.org/wiki/Methods_of_detecting_exoplanets
