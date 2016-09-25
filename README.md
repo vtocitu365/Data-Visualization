@@ -1,7 +1,14 @@
 # Data-Visualization
 
+## Gist Address
+https://gist.github.com/vtocitu365
+
 ## Summary
-Using Hans Rosling’s Gapminder visual format, this project explores how the median radius and Period of extrasolar planets discovered each year has changed. With this visualization, we aim to show that the median radius of the planets have decreased while the median period of the planets discovered have increased as instruments have become more sensitive. This visualization also aims to explore how various planet discovery methods perform with respect to the above metrics. 
+Every year, telescopes such as the Kepler Space Telescope discover hundreds of worlds. These telescopes not only confirm the planet's existence, but they also record characteristics of the planet such as its Radius and its Period (the time it takes the planet to orbit the star). Using Hans Rosling’s Gapminder visual format, this visualization explores the following questions
+
+1. How many planets were discovered each year?
+2. Which planetary discovery methods have been the most effective?
+3. How has the median Radius and Period changed ove the years?
 
 ## Design
 
@@ -20,11 +27,7 @@ PLANETDISCMETHOD: Method used to discover the planet. This is a category, since 
 
 •	Transit: The planet moving in front of its star causes an eclipse when viewed from Earth and thus the star's luminosity decreases.
 
-•	Transit Timing Variation: Once a planet has been discovered by the transit method, a decrease in brightness is to be expected at a period of a planet's orbit. If a repeated decrease in brightness occurs outside of that period, it may indicate the presence of a second planet. 
-
 •	Timing: Other timing methods such as Pulsar Timing (for planets discovered around Pulsars)
-
-•	Microlensing: The planet's gravity bends the star's light, causing a doppler shift in the starlight.
 
 •	Radial Velocity (RV): The planet's gravity causes the star to oscillate. By measuring the oscillation, we can approximate the planet's mass, radius, and orbit. This was the earliest method used, and it typically favors larger planets. 
 
@@ -40,6 +43,11 @@ Each circle represents a PLANETDISCMETH. The centroid of the circle is the media
 Exoplanet detection is still a new field. Thus, the data itself was incomplete. If the planet lacks any of these features, it is not taken into consideration. This is purely for the purpose of preserving the visualization. In addition, planets with extremely large radii and extremely long periods have been discovered. Free-floating planets have also been discovered, which are represented by an infinite period. Since such outliers are so far rare, they have been excluded from the visualization. As the data is right-skewed, the range of both the Period and the Radius is artificially limited to show the relevant trends.
 
 ## Analysis
+The visualization confirms the exponential nature of planetary discoveries. At the same time, it hints at the continued predominance of the transit method. However, there is still not enough information for us to safely assume that this proves Transit is the most effective method. Remember, a lot of planets were removed from this dataset because one of these parameters wasn't listed in the publicly available dataset. With this limitation in mind, we can make the following tentative observations
+
+The median radius and period of planets discovered have increased. The increase in the period hints at an increase in the sensitivity of planet hunting instruments, since a planet that's farther away from its host star requires more sensitive instruments to detect. The increase in median Radius presents a complication in that this median hides the fact that newer instruments can detect ever smaller planets. 
+
+As more data comes in, this visual should improve in its functionality
 
 ## Feedback
 
@@ -51,3 +59,7 @@ https://en.wikipedia.org/wiki/Methods_of_detecting_exoplanets
 https://en.wikipedia.org/wiki/Jupiter
 
 https://en.wikipedia.org/wiki/Earth
+
+https://brettwgreen.com/2013/01/16/motion-chart-using-d3-js/
+
+http://stackoverflow.com/questions/13465796/d3-javascript-difference-between-foreach-and-each
