@@ -50,6 +50,10 @@ The median radius and period of planets discovered have increased. The increase 
 As more data comes in, this visual should improve in its functionality
 
 ## Feedback
+1. Take the square root of numPlanets so that the circle area is proportional to the number of planets discovered
+2. The legend is poorly aligned
+3. The title can't simply be two words
+4. You need to fix the x and y axis. Since the distribution is exponential, people may miss the smaller bubbles
 
 ## References
 http://exoplanets.org/index.html
