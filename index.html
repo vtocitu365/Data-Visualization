@@ -22,9 +22,9 @@
           //Note: to use bl.ocks.org, must have svg fit within 960 x 500 pixels
           "use strict";
 
-          var padding = 55,
-              width = 960,
-              height = 500,
+          var padding = 55*2,
+              width = 960*2,
+              height = 500*2,
               rightBar = width / 8,
               legendheight = height/4;
 
@@ -45,19 +45,21 @@
           var myChart = new dimple.chart(svg, data);
           myChart.setBounds(padding, 2*padding + 10, width - rightBar - 2 * padding, height- 3* padding - 10);
           var xAxis = myChart.addMeasureAxis("x", "R");
+          xAxis.useLog = true;
+          xAxis.logBase = 10;
           var yAxis = myChart.addMeasureAxis("y", "PERIOD");
-          xAxis.addOrderRule("R")
+          yAxis.useLog = true;
+          yAxis.logBase = 10;
+          xAxis.addOrderRule("R");
           var zAxis = myChart.addMeasureAxis("z", "numPlanets");
           
           xAxis.tickFormat = '.1f';
           //Show decimal value on mouse-over
           yAxis.tickFormat = '.1f';  
 
-          //fix the axes so they don't shift around so much during animation
-          xAxis.overrideMin = 0;
-          xAxis.overrideMax = 100;
-          yAxis.overrideMax = 500;
-          yAxis.overrideMin = 0; //BMI axis does not need to go down to 0
+          //Get rid of gridlines
+          xAxis.showGridlines = false;
+          yAxis.showGridlines = false;
 
           xAxis.title = "R (ratio of Jupiter)";
           yAxis.title = "Period (Days)";
@@ -68,23 +70,42 @@
 
           bubbleSeries.getTooltipText = function (e) {
                 return [
-                    "Day: " + e.aggField[0],
-                    "Discovery Method: " + e.aggField[1].sqrt,
-                    "Number Planets:" + (e.zValue).toFixed(2),
-                    "Median Radius: " + Math.log10((e.xValue).toFixed(3)),
-                    "Median Period: " + (e.yValue).toFixed(4)
+                    "Year:" + e.aggField[0],
+                    "Discovery Method: " + e.aggField[1],
+                     "Number Planets:" + (e.zValue).toFixed(2),
+                    "Median Radius: " + Math.round((e.xValue*100).toFixed(3))/100,
+                    "Median Period: " + Math.round((e.yValue).toFixed(4))/100
                 ];
             };
 
 
-        //Add Plot Title
+          //Add Plot Title
           svg.append("text")
             .attr("x", 20)
             .attr("y", 20)
             .style("text-anchor", "left")
             .style("font-family", "sans-serif")
             .style("font-weight", "bold")
-            .text("Characteristics of Discovered Planets")
+            .text("The Number, Median Radius, and Median Period of Discovered Planets have all Increased");
+
+          //Add Explanatory text
+
+          svg.selectAll("explanatory_text")
+            .data(["Between 1990 and 2016, the number of planets discovered increased greatly. However, that is not the whole story.", 
+              "The median Radii of the planets discovered has also increased. The Radius of a planet is given as a ratio of Jupiter's radius.",
+              "So has the median period. A period is the time it takes the planet to orbit the star.",
+              "These trends together demonstrate that not only have telescopes discovered more planets, but telescopes can find planets much farther from their sun.",
+              "Unlike a bar chart, the following chart is able to convey all this information."])
+            .enter()
+            .append("text")
+              .attr("x", 20)
+              .attr("y", function(d, i) { return 40 + i *14; } )
+              .style("font-size", "11px")
+              .style("color", "Black")
+              .style("font-family", "sans-serif")
+              .text(function (d) { return d; });
+
+            
 
           svg.selectAll("discoveryLegendLabel")
             .data(["PLANETDISCMETH"])
@@ -99,8 +120,8 @@
               .text(function (d) { return d; });
 
           //Planetary Discovery Methods legend above chart
-          var myDiscoveryLegend = myChart.addLegend(padding, padding + 28,
-                            rightBar * 4,legendheight, "center");
+          var myDiscoveryLegend = myChart.addLegend(padding+60, padding + 30,
+                            rightBar * 4,legendheight, "left");
 
 
           myChart.draw()
@@ -135,9 +156,10 @@
               //Filter the data by selected
               myChart.data = dimple.filterData(data, "PLANETDISCMETH", discoveryVals);
               myChart.draw(800);
-              if (!isticking) { // only keep animation paused if it is already paused
-                storyboard.pauseAnimation();
-              }
+          
+
+        
+    
               
             });
 
@@ -158,7 +180,7 @@
           PLANETDISCMETH: d.PLANETDISCMETH,
           R: d.R,
           PERIOD: d.PERIOD,
-          numPlanets: d.numPlanets
+          numPlanets: Math.sqrt(d.numPlanets)
           };
         }, draw);
   
