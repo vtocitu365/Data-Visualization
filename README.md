@@ -3,7 +3,7 @@
 ## Gist Address
 https://gist.github.com/vtocitu365
 
-http://bl.ocks.org/vtocitu365/cda2fa4f7e47e57ba1d6c170bf761388
+
 
 ## Summary
 Every year, telescopes such as the Kepler Space Telescope discover hundreds of worlds. These telescopes not only confirm the planet's existence, but they also record characteristics of the planet such as its Radius and its Period (the time it takes the planet to orbit the star). Using Hans Rosling’s Gapminder visual format, this visualization explores the following questions
@@ -79,6 +79,21 @@ Udacity
 * Take the square root of numPlanets so that the circle area is proportional to the number of planets discovered (Sheng Kung, Udacity Coach)
 
 *  Please be sure to include an explanation for all visual encodings, position, color, etc. (Reviewer 1)
+
+* Communicate the findings and explanations within the visualization, either in the title, a paragraph, or an animation (Reviewer 2)
+
+* The points are too small (everyone at Udacity)
+
+* Consider using a different scale (Geore Liu)
+
+* Get rid of the gridlines (Myles Callan)
+
+* Tooltip configured incorrectly (Myles Callan and George Liu)
+
+### Previous Versions
+1. 
+
+2. http://bl.ocks.org/vtocitu365/cda2fa4f7e47e57ba1d6c170bf761388
 
 ## References
 
