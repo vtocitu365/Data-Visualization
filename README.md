@@ -1,4 +1,5 @@
 # Data-Visualization
+http://bl.ocks.org/vtocitu365/e3bd334d89c1a6083a1da33ccc9d65d7
 
 ## Gist Address
 https://gist.github.com/vtocitu365
@@ -91,7 +92,7 @@ Udacity
 * Tooltip configured incorrectly (Myles Callan and George Liu)
 
 ### Previous Versions
-1. 
+1. http://bl.ocks.org/vtocitu365/1df33113d3c03f294f6add0740df4435
 
 2. http://bl.ocks.org/vtocitu365/cda2fa4f7e47e57ba1d6c170bf761388
 
