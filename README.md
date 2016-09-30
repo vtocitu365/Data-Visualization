@@ -1,5 +1,5 @@
 # Data-Visualization
-http://bl.ocks.org/vtocitu365/e3bd334d89c1a6083a1da33ccc9d65d7
+
 
 ## Gist Address
 https://gist.github.com/vtocitu365
@@ -11,7 +11,7 @@ Every year, telescopes such as the Kepler Space Telescope discover hundreds of w
 
 1. How many planets were discovered each year?
 2. Which planetary discovery methods have been the most effective?
-3. How has the median Radius and Period changed ove the years?
+3. How has the median Period changed ove the years?
 
 ## Design
 
@@ -20,8 +20,6 @@ Every year, telescopes such as the Kepler Space Telescope discover hundreds of w
 There are 5454 different exoplanets in this dataset with 4 features. 
 
 •	DATE: The year the planet was discovered (starting in 1990)
-
-•	Radius R (rjupiter): This represents the radius of the planet as a ratio of Jupiter's radius.
 
 •	Period (days): This is how long a "year" is on one of those planets. Very early planets tended to orbit closely to their star, which increased the oscillations favored by the Gravity Method
 
@@ -39,7 +37,7 @@ PLANETDISCMETHOD: Method used to discover the planet. This is a category, since 
 •	Imaging: The planet was directly imaged. This is a new method at the time the data was collected.
 
 ## Outliers and NA
-Exoplanet detection is still a new field. Thus, the data itself was incomplete. If the planet lacks any of these features, it is not taken into consideration. This is purely for the purpose of preserving the visualization. In addition, planets with extremely large radii and extremely long periods have been discovered. Free-floating planets have also been discovered, which are represented by an infinite period. Since such outliers are so far rare, they have been excluded from the visualization. As the data is right-skewed, the range of both the Period and the Radius is artificially limited to show the relevant trends.
+Exoplanet detection is still a new field. Thus, the data itself was incomplete. If the planet lacks any of these features, it is not taken into consideration. This is purely for the purpose of preserving the visualization. In addition, planets with extremely long periods have been discovered. Free-floating planets have also been discovered, which are represented by an infinite period. Since such outliers are so far rare, they have been excluded from the visualization. As the data is right-skewed, the range of both the Period and the Radius is artificially limited to show the relevant trends.
 
 ## Structure of visualization
 
@@ -53,20 +51,23 @@ Exoplanet detection is still a new field. Thus, the data itself was incomplete. 
 
 * Centroid-y: The median period of the planets discovered that year
 
-* Radius: The square root of the number of planets discovered by each method that particular year. We want the circle's area to be proportional to the number of planets discovered that year.
-
 * Coloring: Each method should have its own coloring which lets it stand out when compared to other methods.
 
 ## Analysis
 The visualization confirms the exponential nature of planetary discoveries. At the same time, it hints at the continued predominance of the transit method. However, there is still not enough information for us to safely assume that this proves Transit is the most effective method. Remember, a lot of planets were removed from this dataset because one of these parameters wasn't listed in the publicly available dataset. With this limitation in mind, we can make the following tentative observations
 
-The median radius and period of planets discovered have increased. The increase in the period hints at an increase in the sensitivity of planet hunting instruments, since a planet that's farther away from its host star requires more sensitive instruments to detect. The increase in median Radius presents a complication in that this median hides the fact that newer instruments can detect ever smaller planets. 
+The median period of planets discovered have increased. The increase in the period hints at an increase in the sensitivity of planet hunting instruments, since a planet that's farther away from its host star requires more sensitive instruments to detect. 
 
 As more data comes in, this visual should improve in its functionality
 
 ## Feedback
 The feedback came from a variety of sources, both Udacity and co-workers. The co-workers reviewed it, but I don't have their permission to publicly list their names. Instead, I will put their contributions in its own list. I receive some Udacity feedback from the reviews of previous submissions. Since I don't know the reviewer's name, I will just list them as Reviewer 1, Reviewer 2, etc.
 
+### Version 1
+http://bl.ocks.org/vtocitu365/1df33113d3c03f294f6add0740df4435
+https://gist.github.com/vtocitu365/1df33113d3c03f294f6add0740df4435
+
+This is the feedback I received in version 1: 
 Co-workers
 
 * The legend is poorly aligned
@@ -81,6 +82,14 @@ Udacity
 
 *  Please be sure to include an explanation for all visual encodings, position, color, etc. (Reviewer 1)
 
+To fix the problems, I changed the alignment of the legend to be closer to PLANETDISCMETH. I changed the title. To show the smaller bubbles, I added an x and y maximum override. Unfortunately, that didn't show many of the smaller bubbles. I changed the Summary and Analysis sections of the Readme in response to Reviewer 1.
+
+### Version 2
+http://bl.ocks.org/vtocitu365/cda2fa4f7e47e57ba1d6c170bf761388
+https://gist.github.com/vtocitu365/cda2fa4f7e47e57ba1d6c170bf761388
+
+Here is the feedback I received for this version. All this feedback was from Udacity reviewers
+
 * Communicate the findings and explanations within the visualization, either in the title, a paragraph, or an animation (Reviewer 2)
 
 * The points are too small (everyone at Udacity)
@@ -91,10 +100,21 @@ Udacity
 
 * Tooltip configured incorrectly (Myles Callan and George Liu)
 
-### Previous Versions
-1. http://bl.ocks.org/vtocitu365/1df33113d3c03f294f6add0740df4435
+To fix the problems above, I expanded the title and wrote text explaining the visualization. I used log10 for both the x and y axis. I also got rid of the gridlines.
 
-2. http://bl.ocks.org/vtocitu365/cda2fa4f7e47e57ba1d6c170bf761388
+### Version 3
+http://bl.ocks.org/vtocitu365/e3bd334d89c1a6083a1da33ccc9d65d7
+https://gist.github.com/vtocitu365/e3bd334d89c1a6083a1da33ccc9d65d7
+
+I received the following feedback from the Udacity reviewer:
+
+* This figure has 'low information density'.
+
+* Place the year on the x-axis, the number of planets on the y-axis, and the Period as the radius, and the planet's radius as the colorscheme.
+
+* Properly align the text
+
+I adopted his suggestion, with one exception. I still wanted to keep the PLANETDISCMETH as the color. Thus, I got rid of the radius as a variable. 
 
 ## References
 
