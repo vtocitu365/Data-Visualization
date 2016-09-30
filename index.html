@@ -1,190 +1,198 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="utf-8">
-  <script src="http://d3js.org/d3.v3.min.js"></script>
-  <script src="http://dimplejs.org/dist/dimple.v2.1.2.js"></script>
-  
-  <style>
+    <meta charset="utf-8">
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://dimplejs.org/dist/dimple.v2.1.2.js"></script>
 
-    circle {
-      opacity: 0.6;
-    }
-
-  </style>
+    <style>
+        circle {
+            opacity: 0.6;
+        }
+    </style>
     <script type="text/javascript">
-      function draw(data) {
+        function draw(data) {
 
 
-      /*
-        D3.js setup code
-      */
-          //Note: to use bl.ocks.org, must have svg fit within 960 x 500 pixels
-          "use strict";
+            /*
+              D3.js setup code
+            */
+            //Note: to use bl.ocks.org, must have svg fit within 960 x 500 pixels
+            "use strict";
 
-          var padding = 55*2,
-              width = 960*2,
-              height = 500*2,
-              rightBar = width / 8,
-              legendheight = height/4;
-
-      
-          var svg = d3.select("body")
-            .append("svg")
-              .attr("width", width)
-              .attr("height", height)
-            .append('g')
-                .attr('class','chart');
-          
-          var yearfilter = d3.range(1990, 2016);
-          yearfilter = yearfilter.toString().split(',');
-
-          var frame = 2500; 
-          var firstTick = true;
-          
-          var myChart = new dimple.chart(svg, data);
-          myChart.setBounds(padding, 2*padding + 10, width - rightBar - 2 * padding, height- 3* padding - 10);
-          var xAxis = myChart.addMeasureAxis("x", "R");
-          xAxis.useLog = true;
-          xAxis.logBase = 10;
-          var yAxis = myChart.addMeasureAxis("y", "PERIOD");
-          yAxis.useLog = true;
-          yAxis.logBase = 10;
-          xAxis.addOrderRule("R");
-          var zAxis = myChart.addMeasureAxis("z", "numPlanets");
-          
-          xAxis.tickFormat = '.1f';
-          //Show decimal value on mouse-over
-          yAxis.tickFormat = '.1f';  
-
-          //Get rid of gridlines
-          xAxis.showGridlines = false;
-          yAxis.showGridlines = false;
-
-          xAxis.title = "R (ratio of Jupiter)";
-          yAxis.title = "Period (Days)";
-          zAxis.title = "Number of Discovered Planets";
-
-          var bubbleSeries = myChart.addSeries(["DATE", "PLANETDISCMETH"], dimple.plot.bubble);
+            var padding = 55 * 2,
+                width = 960 * 2,
+                height = 500 * 2,
+                rightBar = width / 8,
+                legendheight = height / 4;
 
 
-          bubbleSeries.getTooltipText = function (e) {
+            var svg = d3.select("body")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                .append('g')
+                .attr('class', 'chart');
+
+            var yearfilter = d3.range(1990, 2016);
+            yearfilter = yearfilter.toString().split(',');
+            var parseDate = d3.time.format("%y").parse;
+            console.log(parseDate)
+
+            var frame = 2500;
+            var firstTick = true;
+
+            var myChart = new dimple.chart(svg, data);
+            myChart.setBounds(padding, 2 * padding + 10, width - rightBar - 2 * padding, height - 3 * padding - 10);
+            console.log(data.x)
+            var xAxis = myChart.addMeasureAxis("x", "DATE");
+            // xAxis.useLog = true;
+            // Axis.logBase = 10;
+            var yAxis = myChart.addMeasureAxis("y", "numPlanets");
+            // yAxis.useLog = true;
+            // yAxis.logBase = 10;
+            var zAxis = myChart.addMeasureAxis("z", "numPlanets");
+            console.log(xAxis)
+            xAxis.addOrderRule("DATE");
+            xAxis.tickFormat = '1f';
+            //Show decimal value on mouse-over
+            yAxis.tickFormat = '1f';
+
+            //Get rid of gridlines
+            xAxis.showGridlines = false;
+            yAxis.showGridlines = false;
+
+            xAxis.title = "Year Discovered";
+            yAxis.title = "Number of Planets Discovered by each Method";
+            zAxis.title = "Period of the Planets in Days";
+
+            var bubbleSeries = myChart.addSeries(["PLANETDISCMETH"], dimple.plot.bubble);
+            console.log(bubbleSeries)
+
+
+            bubbleSeries.getTooltipText = function(e) {
                 return [
-                    "Year:" + e.aggField[0],
                     "Discovery Method: " + e.aggField[1],
-                     "Number Planets:" + (e.zValue).toFixed(2),
-                    "Median Radius: " + Math.round((e.xValue*100).toFixed(3))/100,
-                    "Median Period: " + Math.round((e.yValue).toFixed(4))/100
+                    "Number Planets:" + (e.zValue).toFixed(2),
+                    "Year:" + (e.xValue).toFixed(3),
+                    "Median Period: " + Math.round((e.yValue).toFixed(4)) / 100
                 ];
             };
 
 
-          //Add Plot Title
-          svg.append("text")
-            .attr("x", 20)
-            .attr("y", 20)
-            .style("text-anchor", "left")
-            .style("font-family", "sans-serif")
-            .style("font-weight", "bold")
-            .text("The Number, Median Radius, and Median Period of Discovered Planets have all Increased");
+            //Add Plot Title
+            svg.append("text")
+                .attr("x", 20)
+                .attr("y", 20)
+                .style("text-anchor", "left")
+                .style("font-family", "sans-serif")
+                .style("font-weight", "bold")
+                .text("The Number, Median Radius, and Median Period of Discovered Planets have all Increased");
 
-          //Add Explanatory text
+            //Add Explanatory text
 
-          svg.selectAll("explanatory_text")
-            .data(["Between 1990 and 2016, the number of planets discovered increased greatly. However, that is not the whole story.", 
-              "The median Radii of the planets discovered has also increased. The Radius of a planet is given as a ratio of Jupiter's radius.",
-              "So has the median period. A period is the time it takes the planet to orbit the star.",
-              "These trends together demonstrate that not only have telescopes discovered more planets, but telescopes can find planets much farther from their sun.",
-              "Unlike a bar chart, the following chart is able to convey all this information."])
-            .enter()
-            .append("text")
-              .attr("x", 20)
-              .attr("y", function(d, i) { return 40 + i *14; } )
-              .style("font-size", "11px")
-              .style("color", "Black")
-              .style("font-family", "sans-serif")
-              .text(function (d) { return d; });
-
-            
-
-          svg.selectAll("discoveryLegendLabel")
-            .data(["PLANETDISCMETH"])
-            .enter()
-            .append("text")
-              .attr("x", 20)
-              .attr("y", padding + 38 )
-              .style("font-size", "14px")
-              .style("font-weight", "bold")
-              .style("color", "Black")
-              .style("font-family", "sans-serif")
-              .text(function (d) { return d; });
-
-          //Planetary Discovery Methods legend above chart
-          var myDiscoveryLegend = myChart.addLegend(padding+60, padding + 30,
-                            rightBar * 4,legendheight, "left");
+            svg.selectAll("explanatory_text")
+                .data(["Between 1990 and 2016, the number of planets discovered increased greatly. However, that is not the whole story.",
+                    "The median Radii of the planets discovered has also increased. The Radius of a planet is given as a ratio of Jupiter's radius.",
+                    "So has the median period. A period is the time it takes the planet to orbit the star.",
+                    "These trends together demonstrate that not only have telescopes discovered more planets, but telescopes can find planets much farther from their sun.",
+                    "Unlike a bar chart, the following chart is able to convey all this information."
+                ])
+                .enter()
+                .append("text")
+                .attr("x", 20)
+                .attr("y", function(d, i) {
+                    return 40 + i * 14;
+                })
+                .style("font-size", "11px")
+                .style("color", "Black")
+                .style("font-family", "sans-serif")
+                .text(function(d) {
+                    return d;
+                });
 
 
-          myChart.draw()
 
-          myChart.legends = [];
+            svg.selectAll("discoveryLegendLabel")
+                .data(["PLANETDISCMETH"])
+                .enter()
+                .append("text")
+                .attr("x", 20)
+                .attr("y", padding + 38)
+                .style("font-size", "14px")
+                .style("font-weight", "bold")
+                .style("color", "Black")
+                .style("font-family", "sans-serif")
+                .text(function(d) {
+                    return d;
+                });
 
-          var discoveryVals = dimple.getUniqueValues(data, "PLANETDISCMETH");
+            //Planetary Discovery Methods legend above chart
+            var myDiscoveryLegend = myChart.addLegend(padding + 60, padding + 30,
+                rightBar * 4, legendheight, "left");
 
-          myDiscoveryLegend.shapes.selectAll("rect")
-            //Add a click event to each rectangle
-            .on("click", function (e)  {
-              //Is rectangle already visible?
-              var hideRect = false;
-              var newFilters = [];
-              //if filters contain clicked shape then hide it
-              discoveryVals.forEach(function (f) {
-                if (f === e.aggField.slice(-1)[0]) {
-                  hideRect = true;
-                } else {
-                  newFilters.push(f);
-                }
-              });
-              // Either hide the shape or show it now
-              if (hideRect) {
-                d3.select(this).style("opacity", 0.2);
-              } else {
-                newFilters.push(e.aggField.slice(-1)[0]);
-                d3.select(this).style("opacity", 0.8);
-              }
-              //Update our filters now
-              discoveryVals = newFilters;
-              //Filter the data by selected
-              myChart.data = dimple.filterData(data, "PLANETDISCMETH", discoveryVals);
-              myChart.draw(800);
-          
 
-        
-    
-              
-            });
+            myChart.draw()
 
-      };
+            myChart.legends = [];
 
-</script>
+            var discoveryVals = dimple.getUniqueValues(data, "PLANETDISCMETH");
+
+            myDiscoveryLegend.shapes.selectAll("rect")
+                //Add a click event to each rectangle
+                .on("click", function(e) {
+                    //Is rectangle already visible?
+                    var hideRect = false;
+                    var newFilters = [];
+                    //if filters contain clicked shape then hide it
+                    discoveryVals.forEach(function(f) {
+                        if (f === e.aggField.slice(-1)[0]) {
+                            hideRect = true;
+                        } else {
+                            newFilters.push(f);
+                        }
+                    });
+                    // Either hide the shape or show it now
+                    if (hideRect) {
+                        d3.select(this).style("opacity", 0.2);
+                    } else {
+                        newFilters.push(e.aggField.slice(-1)[0]);
+                        d3.select(this).style("opacity", 0.8);
+                    }
+                    //Update our filters now
+                    discoveryVals = newFilters;
+                    //Filter the data by selected
+                    myChart.data = dimple.filterData(data, "PLANETDISCMETH", discoveryVals);
+                    myChart.draw(800);
+
+
+
+
+                });
+
+        };
+    </script>
 </head>
+
 <body>
-  <script type="text/javascript">
-  /*
-    Use D3 (not dimple.js) to load the TSV file
-    and pass the contents of it to the draw function
-    */
-
-  d3.csv("exoplanets.csv", function(d) {
-    return {
-          DATE: d.DATE,
-          PLANETDISCMETH: d.PLANETDISCMETH,
-          R: d.R,
-          PERIOD: d.PERIOD,
-          numPlanets: Math.sqrt(d.numPlanets)
-          };
+    <script type="text/javascript">
+        /*
+            Use D3 (not dimple.js) to load the TSV file
+            and pass the contents of it to the draw function
+            */
+        d3.csv("exoplanets.csv", function(d) {
+            var format = d3.time.format("%Y");
+            return {
+                DATE: format.parse(d.DATE),
+                PLANETDISCMETH: d.PLANETDISCMETH,
+                R: d.R,
+                PERIOD: d.PERIOD,
+                numPlanets: Math.sqrt(d.numPlanets)
+            };
         }, draw);
-  
 
-  </script>
+    </script>
 </body>
+
 </html>
