@@ -129,3 +129,5 @@ https://en.wikipedia.org/wiki/Earth
 https://brettwgreen.com/2013/01/16/motion-chart-using-d3-js/
 
 http://stackoverflow.com/questions/13465796/d3-javascript-difference-between-foreach-and-each
+
+http://jsbeautifier.org/
