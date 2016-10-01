@@ -41,7 +41,7 @@ Exoplanet detection is still a new field. Thus, the data itself was incomplete. 
 
 ## Structure of visualization
 
-* Circle: Each circle represents a planetary discovery method. Since there are four discovery methods, each year has up to four circles. Note that some of these methods didn't exist in the 1990s and 2000s. Also, some of these methods didn't yield any discoveries or their planets were removed from consideration as described in the section above. Thus, the circles representing some methods don't appear every year.
+* Circle: Each circle represents a planetary discovery method. Since there are four discovery methods, each year has up to four circles. Note that some of these methods didn't yield any discoveries or their planets were removed from consideration as described in the section above. Thus, the circles representing some methods don't appear every year.
 
 * x-Axis: The year in which the planet was discovered.
 
@@ -54,7 +54,7 @@ Exoplanet detection is still a new field. Thus, the data itself was incomplete. 
 ## Analysis
 The visualization confirms the exponential nature of planetary discoveries. At the same time, it hints at the continued predominance of the transit method. However, there is still not enough information for us to safely assume that this proves Transit is the most effective method. Remember, a lot of planets were removed from this dataset because one of these parameters wasn't listed in the publicly available dataset. With this limitation in mind, we can make the following tentative observations
 
-The median period of planets discovered have increased. The increase in the period hints at an increase in the sensitivity of planet hunting instruments, since a planet that's farther away from its host star requires more sensitive instruments to detect. 
+The median radius of the planets discovered has increased. This is a surprise. The first is that some of the largest planets detected are very close to their stars, with periods of days. Thus, these were the first planets ever detected as they were the easiest to detect. As the instruments became more sensitive, smaller planets were able to be discovered. Of course, any method which discovers smaller planets is more than capable of discovering the easy-to-find large planets. 
 
 As more data comes in, this visual should improve in its functionality
 
