@@ -1,5 +1,5 @@
 # Data-Visualization
-http://bl.ocks.org/vtocitu365/148cbea1ec72254ea3db79d4493756a0
+http://bl.ocks.org/vtocitu365/f38a96a0fa701f398fc72ca08de02b4b
 
 ## Gist Address
 https://gist.github.com/vtocitu365
@@ -113,6 +113,12 @@ I received the following feedback from the Udacity reviewer:
 * Properly align the text
 
 I adopted his suggestion, with one exception. I still wanted to keep the PLANETDISCMETH as the color. Thus, I got rid of the period as a variable. Instead, I added an animation which should highlight different planetary discovery methods. 
+
+### Version 4
+http://bl.ocks.org/vtocitu365/148cbea1ec72254ea3db79d4493756a0
+https://gist.github.org/vtocitu365/148cbea1ec72254ea3db79d4493756a0
+
+I received the review to make it a bar chart.
 
 ## References
 
