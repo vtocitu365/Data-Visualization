@@ -21,7 +21,7 @@ There are 5454 different exoplanets in this dataset with 4 features.
 
 •	DATE: The year the planet was discovered (starting in 1990)
 
-•	Period (days): This is how long a "year" is on one of those planets. Very early planets tended to orbit closely to their star, which increased the oscillations favored by the Gravity Method
+•	Radius: The radius of the planet as a ratio of Jupiter's radius
 
 •	numPlanets: I created this variable. This is the number of planets discovered in the same year as the particular exoplanet by the same planetary discovery method 
 
@@ -37,19 +37,17 @@ PLANETDISCMETHOD: Method used to discover the planet. This is a category, since 
 •	Imaging: The planet was directly imaged. This is a new method at the time the data was collected.
 
 ## Outliers and NA
-Exoplanet detection is still a new field. Thus, the data itself was incomplete. If the planet lacks any of these features, it is not taken into consideration. This is purely for the purpose of preserving the visualization. In addition, planets with extremely long periods have been discovered. Free-floating planets have also been discovered, which are represented by an infinite period. Since such outliers are so far rare, they have been excluded from the visualization. As the data is right-skewed, the range of both the Period and the Radius is artificially limited to show the relevant trends.
+Exoplanet detection is still a new field. Thus, the data itself was incomplete. If the planet lacks any of these features, it is not taken into consideration. This is purely for the purpose of preserving the visualization. In addition, planets with extremely large radii have been discovered. Since such outliers are so far rare, they have been excluded from the visualization. As the data is right-skewed, the range of and the Radius is artificially limited to show the relevant trends.
 
 ## Structure of visualization
 
 * Circle: Each circle represents a planetary discovery method. Since there are four discovery methods, each year has up to four circles. Note that some of these methods didn't exist in the 1990s and 2000s. Also, some of these methods didn't yield any discoveries or their planets were removed from consideration as described in the section above. Thus, the circles representing some methods don't appear every year.
 
-* x-Axis: The radius of the planets as a ratio of Jupiter's radius
+* x-Axis: The year in which the planet was discovered.
 
-* y-Axis: The planet's equivalent of a year (period) measured in days
+* y-Axis: The log of the number of planets discovered that year
 
-* Centroid-x: The median radii of the planets discovered that year
-
-* Centroid-y: The median period of the planets discovered that year
+* Radius: The median Radii of the planets discovered that year.
 
 * Coloring: Each method should have its own coloring which lets it stand out when compared to other methods.
 
