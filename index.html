@@ -21,9 +21,9 @@
             //Note: to use bl.ocks.org, must have svg fit within 960 x 500 pixels
             "use strict";
 
-            var padding = 55 * 2,
-                width = 960 * 2,
-                height = 500 * 2,
+            var padding = 60,
+                width = 960,
+                height = 500,
                 rightBar = width / 8,
                 legendheight = height / 4;
 
@@ -65,14 +65,13 @@
             yAxis.title = "Number of Planets Discovered by each Method";
             zAxis.title = "Radius of the planets as a fraction of Jupiter's";
 
-            var bubbleSeries = myChart.addSeries(["DATE", "PLANETDISCMETH"], dimple.plot.bubble);
+            var bubbleSeries = myChart.addSeries(["DATE", "PLANETDISCMETH"], dimple.plot.bar);
 
             bubbleSeries.getTooltipText = function(e) {
                 return [
                     "Discovery Method: " + e.aggField[1],
                     "Number Planets:" + (e.yValue).toFixed(2),
-                    "Year:" +e.xField[0].getFullYear(),
-                    "Median Radius: " + Math.round((e.zValue).toFixed(4)) / 100
+                    "Year:" +e.xField[0].getFullYear()
                 ];
             };
 
@@ -90,8 +89,9 @@
 
             svg.selectAll("explanatory_text")
                 .data(["Between 2000 and 2016, the number of planets discovered increased greatly. However, that is not the whole story.",
-                    "The median Radii of the planets discovered has also increased. The Radius of a planet is given as a ratio of Jupiter's radius. Some planetary discovery methods work better at detecting smaller planets compared to others.",
-                    "Right now, all planetary discovery methods are selected. Thus, the Transit method dominates. Please deselect it by first clicking the rectangles of the methods you wish to select, and then click the blue rectangle to deselect Transit"
+                    "The median Radii of the planets discovered has also increased. The Radius of a planet is given as a ratio of Jupiter's radius. Some planetary discovery methods",
+                    " work better at detecting smaller planets compared to others. Right now, all planetary discovery methods are selected. Thus, the Transit method dominates.",
+                    " Please deselect it by first clicking the rectangles of the methods you wish to select, and then click the blue rectangle to deselect Transit"
                 ])
                 .enter()
                 .append("text")
@@ -113,7 +113,7 @@
                 .enter()
                 .append("text")
                 .attr("x", 20)
-                .attr("y", padding + 38)
+                .attr("y", padding + 48)
                 .style("font-size", "14px")
                 .style("font-weight", "bold")
                 .style("color", "Black")
@@ -123,7 +123,7 @@
                 });
 
             //Planetary Discovery Methods legend above chart
-            var myDiscoveryLegend = myChart.addLegend(padding + 60, padding + 30,
+            var myDiscoveryLegend = myChart.addLegend(padding + 120, padding + 40,
                 rightBar * 4, legendheight, "left");
 
 
