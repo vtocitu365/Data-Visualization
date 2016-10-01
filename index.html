@@ -45,12 +45,14 @@
             myChart.setBounds(padding, 2 * padding + 10, width - rightBar - 2 * padding, height - 3 * padding - 10);
 
             var xAxis = myChart.addTimeAxis("x", "DATE");
-            xAxis.addOrderRule("DATE");
+            xAxis.tickFormat = "%Y";
+
+            //xAxis.addOrderRule("DATE");
             var yAxis = myChart.addMeasureAxis("y", "numPlanets");
             yAxis.useLog = true;
             yAxis.logBase = 10;
             var zAxis = myChart.addMeasureAxis("z", "R");
-            xAxis.overrideMin = 1990;
+            xAxis.overrideMin = d3.time.format("%Y").parse("2000");
             //Show decimal value on mouse-over
             //xAxis.tickFormat = '1f';
             yAxis.tickFormat = '1f';
@@ -69,8 +71,8 @@
                 return [
                     "Discovery Method: " + e.aggField[1],
                     "Number Planets:" + (e.yValue).toFixed(2),
-                    "Year:" + e.aggField[0],
-                    "Median Period: " + Math.round((e.zValue).toFixed(4)) / 100
+                    "Year:" +e.xField[0].getFullYear(),
+                    "Median Radius: " + Math.round((e.zValue).toFixed(4)) / 100
                 ];
             };
 
@@ -87,7 +89,7 @@
             //Add Explanatory text
 
             svg.selectAll("explanatory_text")
-                .data(["Between 1990 and 2016, the number of planets discovered increased greatly. However, that is not the whole story.",
+                .data(["Between 2000 and 2016, the number of planets discovered increased greatly. However, that is not the whole story.",
                     "The median Radii of the planets discovered has also increased. The Radius of a planet is given as a ratio of Jupiter's radius. Some planetary discovery methods work better at detecting smaller planets compared to others.",
                     "Right now, all planetary discovery methods are selected. Thus, the Transit method dominates. Please deselect it by first clicking the rectangles of the methods you wish to select, and then click the blue rectangle to deselect Transit"
                 ])
@@ -107,7 +109,7 @@
 
 
             svg.selectAll("discoveryLegendLabel")
-                .data(["PERIOD"])
+                .data(["PLANETDISCMETH"])
                 .enter()
                 .append("text")
                 .attr("x", 20)
@@ -129,7 +131,7 @@
 
             myChart.legends = [];
 
-            var discoveryVals = dimple.getUniqueValues(data, "PERIOD");
+            var discoveryVals = dimple.getUniqueValues(data, "PLANETDISCMETH");
 
             myDiscoveryLegend.shapes.selectAll("rect")
                 //Add a click event to each rectangle
@@ -176,7 +178,7 @@
         d3.csv("exoplanets.csv", function(d) {
             var format = d3.time.format("%Y");
             return {
-                DATE: format.parse(d.DATE).getUTCFullYear(),
+                DATE: + format.parse(d.DATE),
                 PLANETDISCMETH: d.PLANETDISCMETH,
                 R: d.R,
                 PERIOD: d.PERIOD,
