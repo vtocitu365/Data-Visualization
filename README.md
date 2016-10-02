@@ -1,5 +1,5 @@
 # Data-Visualization
-http://bl.ocks.org/vtocitu365/f38a96a0fa701f398fc72ca08de02b4b
+
 
 ## Gist Address
 https://gist.github.com/vtocitu365
@@ -20,8 +20,6 @@ Every year, telescopes such as the Kepler Space Telescope discover hundreds of w
 There are 5454 different exoplanets in this dataset with 4 features. 
 
 •	DATE: The year the planet was discovered (starting in 1990)
-
-•	Radius: The radius of the planet as a ratio of Jupiter's radius
 
 •	numPlanets: I created this variable. This is the number of planets discovered in the same year as the particular exoplanet by the same planetary discovery method 
 
@@ -119,6 +117,12 @@ http://bl.ocks.org/vtocitu365/148cbea1ec72254ea3db79d4493756a0
 https://gist.github.org/vtocitu365/148cbea1ec72254ea3db79d4493756a0
 
 I received the review to make it a bar chart.
+
+### Version 5
+http://bl.ocks.org/vtocitu365/f38a96a0fa701f398fc72ca08de02b4b
+https://gist.github.com/vtocitu365/f38a96a0fa701f398fc72ca08de02b4b
+
+I received the review to make it a dodged bar chart.
 
 ## References
 
