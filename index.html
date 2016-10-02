@@ -44,15 +44,17 @@
             var myChart = new dimple.chart(svg, data);
             myChart.setBounds(padding, 2 * padding + 10, width - rightBar - 2 * padding, height - 3 * padding - 10);
 
-            var xAxis = myChart.addTimeAxis("x", "DATE");
-            xAxis.tickFormat = "%Y";
+            var xAxis = myChart.addCategoryAxis("x", ["DATE", "PLANETDISCMETH"]);
+            xAxis.parseDates = true;
+            xAxis.dataDateFormat = "%Y"
+                //xAxis.tickFormat = "%Y";
 
             //xAxis.addOrderRule("DATE");
             var yAxis = myChart.addMeasureAxis("y", "numPlanets");
             yAxis.useLog = true;
             yAxis.logBase = 10;
             var zAxis = myChart.addMeasureAxis("z", "R");
-            xAxis.overrideMin = d3.time.format("%Y").parse("2000");
+            ///xAxis.overrideMin = d3.time.format("%Y").parse("1999");
             //Show decimal value on mouse-over
             //xAxis.tickFormat = '1f';
             yAxis.tickFormat = '1f';
@@ -65,13 +67,14 @@
             yAxis.title = "Number of Planets Discovered by each Method";
             zAxis.title = "Radius of the planets as a fraction of Jupiter's";
 
-            var bubbleSeries = myChart.addSeries(["DATE", "PLANETDISCMETH"], dimple.plot.bar);
+            var bubbleSeries = myChart.addSeries("PLANETDISCMETH", dimple.plot.bar);
+
 
             bubbleSeries.getTooltipText = function(e) {
                 return [
                     "Discovery Method: " + e.aggField[1],
                     "Number Planets:" + (e.yValue).toFixed(2),
-                    "Year:" +e.xField[0].getFullYear()
+                    "Year:" + e.xField[0]
                 ];
             };
 
@@ -172,13 +175,13 @@
 <body>
     <script type="text/javascript">
         /*
-                    Use D3 (not dimple.js) to load the TSV file
-                    and pass the contents of it to the draw function
-                    */
+                            Use D3 (not dimple.js) to load the TSV file
+                            and pass the contents of it to the draw function
+                            */
         d3.csv("exoplanets.csv", function(d) {
             var format = d3.time.format("%Y");
             return {
-                DATE: + format.parse(d.DATE),
+                DATE: +format.parse(d.DATE).getFullYear(),
                 PLANETDISCMETH: d.PLANETDISCMETH,
                 R: d.R,
                 PERIOD: d.PERIOD,
