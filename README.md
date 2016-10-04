@@ -1,5 +1,5 @@
 # Data-Visualization
-
+http://bl.ocks.org/vtocitu365/ec061f5d5b3c36e8d40ac053e9251040
 
 ## Gist Address
 https://gist.github.com/vtocitu365
@@ -39,7 +39,7 @@ Exoplanet detection is still a new field. Thus, the data itself was incomplete. 
 
 ## Structure of visualization
 
-* Circle: Each circle represents a planetary discovery method. Since there are four discovery methods, each year has up to four circles. Note that some of these methods didn't yield any discoveries or their planets were removed from consideration as described in the section above. Thus, the circles representing some methods don't appear every year.
+* Bar: Each bar represents the number of planets discovered using a particular discovery method for a period of a year.
 
 * x-Axis: The year in which the planet was discovered.
 
@@ -61,6 +61,7 @@ The feedback came from a variety of sources, both Udacity and co-workers. The co
 
 ### Version 1
 http://bl.ocks.org/vtocitu365/1df33113d3c03f294f6add0740df4435
+
 https://gist.github.com/vtocitu365/1df33113d3c03f294f6add0740df4435
 
 This is the feedback I received in version 1: 
@@ -82,6 +83,7 @@ To fix the problems, I changed the alignment of the legend to be closer to PLANE
 
 ### Version 2
 http://bl.ocks.org/vtocitu365/cda2fa4f7e47e57ba1d6c170bf761388
+
 https://gist.github.com/vtocitu365/cda2fa4f7e47e57ba1d6c170bf761388
 
 Here is the feedback I received for this version. All this feedback was from Udacity reviewers
@@ -100,6 +102,7 @@ To fix the problems above, I expanded the title and wrote text explaining the vi
 
 ### Version 3
 http://bl.ocks.org/vtocitu365/e3bd334d89c1a6083a1da33ccc9d65d7
+
 https://gist.github.com/vtocitu365/e3bd334d89c1a6083a1da33ccc9d65d7
 
 I received the following feedback from the Udacity reviewer:
@@ -114,15 +117,22 @@ I adopted his suggestion, with one exception. I still wanted to keep the PLANETD
 
 ### Version 4
 http://bl.ocks.org/vtocitu365/148cbea1ec72254ea3db79d4493756a0
+
 https://gist.github.org/vtocitu365/148cbea1ec72254ea3db79d4493756a0
 
 I received the review to make it a bar chart.
 
 ### Version 5
 http://bl.ocks.org/vtocitu365/f38a96a0fa701f398fc72ca08de02b4b
+
 https://gist.github.com/vtocitu365/f38a96a0fa701f398fc72ca08de02b4b
 
 I received the review to make it a dodged bar chart.
+
+### Version 6
+http://bl.ocks.org/vtocitu365/ec061f5d5b3c36e8d40ac053e9251040
+
+https://gist.github.com/vtocitu365/ec061f5d5b3c36e8d40ac053e9251040
 
 ## References
 
