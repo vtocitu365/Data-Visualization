@@ -134,6 +134,8 @@ http://bl.ocks.org/vtocitu365/ec061f5d5b3c36e8d40ac053e9251040
 
 https://gist.github.com/vtocitu365/ec061f5d5b3c36e8d40ac053e9251040
 
+The reviewer asked to fix the tooltip's position and incorrect values.
+
 ## References
 
 http://exoplanets.org/index.html
