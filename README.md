@@ -151,3 +151,9 @@ https://brettwgreen.com/2013/01/16/motion-chart-using-d3-js/
 http://stackoverflow.com/questions/13465796/d3-javascript-difference-between-foreach-and-each
 
 http://jsbeautifier.org/
+
+http://bl.ocks.org/mbostock/1087001
+
+https://github.com/Caged/d3-tip/blob/master/docs/positioning-tooltips.md
+
+http://canvasjs.com/docs/charts/basics-of-creating-html5-chart/tool-tip/
