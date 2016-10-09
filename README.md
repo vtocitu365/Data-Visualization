@@ -7,11 +7,12 @@ https://gist.github.com/vtocitu365
 
 
 ## Summary
-Every year, telescopes such as the Kepler Space Telescope discover hundreds of worlds. These telescopes not only confirm the planet's existence, but they also record characteristics of the planet such as its Radius and its Period (the time it takes the planet to orbit the star). Using Hans Rosling’s Gapminder visual format, this visualization explores the following questions
+Every year, telescopes such as the Kepler Space Telescope discover hundreds of worlds. Using Hans Rosling’s Gapminder visual format, this visualization explores the following questions
 
 1. How many planets were discovered each year?
 2. Which planetary discovery methods have been the most effective?
-3. How has the median Period changed ove the years?
+
+The visualization confirms the exponential nature of planetary discoveries and hints at the continued predominance of the transit method. However, there is still not enough information for us to safely assume that this proves Transit is the most effective method as a lot of planets were removed from this dataset because one of these parameters wasn't listed in the publicly available dataset.
 
 ## Design
 
@@ -45,16 +46,7 @@ Exoplanet detection is still a new field. Thus, the data itself was incomplete. 
 
 * y-Axis: The log of the number of planets discovered that year
 
-* Radius: The median Radii of the planets discovered that year.
-
 * Coloring: Each method should have its own coloring which lets it stand out when compared to other methods.
-
-## Analysis
-The visualization confirms the exponential nature of planetary discoveries. At the same time, it hints at the continued predominance of the transit method. However, there is still not enough information for us to safely assume that this proves Transit is the most effective method. Remember, a lot of planets were removed from this dataset because one of these parameters wasn't listed in the publicly available dataset. With this limitation in mind, we can make the following tentative observations
-
-The median radius of the planets discovered has increased. This is a surprise. The first is that some of the largest planets detected are very close to their stars, with periods of days. Thus, these were the first planets ever detected as they were the easiest to detect. As the instruments became more sensitive, smaller planets were able to be discovered. Of course, any method which discovers smaller planets is more than capable of discovering the easy-to-find large planets. 
-
-As more data comes in, this visual should improve in its functionality
 
 ## Feedback
 The feedback came from a variety of sources, both Udacity and co-workers. The co-workers reviewed it, but I don't have their permission to publicly list their names. Instead, I will put their contributions in its own list. I receive some Udacity feedback from the reviews of previous submissions. Since I don't know the reviewer's name, I will just list them as Reviewer 1, Reviewer 2, etc.
@@ -65,6 +57,7 @@ http://bl.ocks.org/vtocitu365/1df33113d3c03f294f6add0740df4435
 https://gist.github.com/vtocitu365/1df33113d3c03f294f6add0740df4435
 
 This is the feedback I received in version 1: 
+
 Co-workers
 
 * The legend is poorly aligned
@@ -157,3 +150,5 @@ http://bl.ocks.org/mbostock/1087001
 https://github.com/Caged/d3-tip/blob/master/docs/positioning-tooltips.md
 
 http://canvasjs.com/docs/charts/basics-of-creating-html5-chart/tool-tip/
+
+https://github.com/PMSI-AlignAlytics/dimple/wiki/dimple#newSvg
